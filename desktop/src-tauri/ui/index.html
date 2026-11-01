@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SoundBettrCore desktop spatial audio processor, Harman target equalizer, and Anker Soundcore R50i NC Bluetooth controller.">
+  <title>SoundBettrCore Spatial &amp; Harman Audio Studio</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app" data-ui>
+    <div class="app-shell">
+      <nav class="icon-rail" aria-label="Workspace navigation">
+        <div class="rail-brand" title="SoundBettrCore A3959 Engine">SB</div>
+        <button type="button" class="rail-btn" id="nav-simple" aria-current="page" aria-label="Simple studio view" title="Simple Studio View">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="8"></circle>
+            <path d="M12 12L16 8"></path>
+          </svg>
+        </button>
+        <button type="button" class="rail-btn" id="nav-pro" aria-label="Pro parametric and EEPROM rack" title="Pro Parametric &amp; EEPROM Rack">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M4 20V4M10 20V10M16 20V6M22 20V14"></path>
+          </svg>
+        </button>
+        <button type="button" class="rail-btn" id="nav-hw" aria-label="Soundcore R50i NC hardware settings" title="R50i NC Hardware &amp; Touch Remapper">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M6 14v-3a6 6 0 1 1 12 0v3"></path>
+            <rect x="4" y="13" width="4" height="6" rx="1"></rect>
+            <rect x="16" y="13" width="4" height="6" rx="1"></rect>
+          </svg>
+        </button>
+        <div class="rail-spacer"></div>
+        <button type="button" class="rail-btn" id="btn-export-apo" aria-label="Export EqualizerAPO file" title="Export EqualizerAPO .txt">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"></path>
+          </svg>
+        </button>
+      </nav>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div class="topbar-title-group">
+            <h1 class="app-title">SoundBettrCore</h1>
+            <span class="app-subtitle">Anker Soundcore R50i NC (A3959) Spatial &amp; Harman Audio Processor</span>
+          </div>
+
+          <div class="topbar-controls">
+            <span class="status-pill" id="bt-status-pill" data-tone="positive">R50i NC: L 90%, R 90%</span>
+            <span class="status-pill" id="apo-status-pill">APO Live Sync Ready</span>
+
+            <div class="tab-strip" role="tablist" aria-label="View mode">
+              <button type="button" role="tab" class="tab-link" id="tab-simple" aria-selected="true">Simple Mode</button>
+              <button type="button" role="tab" class="tab-link" id="tab-pro" aria-selected="false">Pro Rack</button>
+              <button type="button" role="tab" class="tab-link" id="tab-hw" aria-selected="false">R50i NC Hardware</button>
+            </div>
+
+            <button type="button" class="btn-control" id="btn-bypass" data-bypass="false">A/B DSP Active</button>
+            <button type="button" class="btn-control" id="btn-scan-bt">Sync R50i NC</button>
+            <button type="button" class="btn-control" id="btn-import-apo">Import Config</button>
+            <input type="file" id="file-import-config" accept=".txt,.json" class="hidden-panel">
+          </div>
+        </header>
+
+        <section id="view-simple" class="grid-main" aria-label="Simple studio rack">
+          <div class="col-stack">
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Acoustic &amp; Spatial Presets</h2>
+                <span class="card-meta" id="active-preset-label">Active: R50i NC Harman Reference</span>
+              </div>
+              <div class="preset-grid" id="preset-grid"></div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Macro Enhancement Dials</h2>
+                <span class="card-meta">Real-time 64-bit host DSP + EqualizerAPO sync</span>
+              </div>
+              <div class="macro-row">
+                <div class="macro-dial-box">
+                  <svg class="dial-svg" viewBox="0 0 80 80" aria-hidden="true">
+                    <circle class="dial-track" cx="40" cy="40" r="30"></circle>
+                    <circle class="dial-arc" id="arc-surround" cx="40" cy="40" r="30" stroke-dasharray="188.5" stroke-dashoffset="122"></circle>
+                  </svg>
+                  <div class="dial-readout" id="val-surround">35%</div>
+                  <label class="dial-label" for="rng-surround">3D 7.1 Surround</label>
+                  <input type="range" class="range-input" id="rng-surround" min="0" max="100" value="35">
+                </div>
+
+                <div class="macro-dial-box">
+                  <svg class="dial-svg" viewBox="0 0 80 80" aria-hidden="true">
+                    <circle class="dial-track" cx="40" cy="40" r="30"></circle>
+                    <circle class="dial-arc" id="arc-subbass" cx="40" cy="40" r="30" stroke-dasharray="188.5" stroke-dashoffset="116"></circle>
+                  </svg>
+                  <div class="dial-readout" id="val-subbass">38%</div>
+                  <label class="dial-label" for="rng-subbass">Harmonic Sub-Bass</label>
+                  <input type="range" class="range-input" id="rng-subbass" min="0" max="100" value="38">
+                </div>
+
+                <div class="macro-dial-box">
+                  <svg class="dial-svg" viewBox="0 0 80 80" aria-hidden="true">
+                    <circle class="dial-track" cx="40" cy="40" r="30"></circle>
+                    <circle class="dial-arc" id="arc-clarity" cx="40" cy="40" r="30" stroke-dasharray="188.5" stroke-dashoffset="109"></circle>
+                  </svg>
+                  <div class="dial-readout" id="val-clarity">42%</div>
+                  <label class="dial-label" for="rng-clarity">Vocal &amp; Dialog Clarity</label>
+                  <input type="range" class="range-input" id="rng-clarity" min="0" max="100" value="42">
+                </div>
+
+                <div class="macro-dial-box">
+                  <svg class="dial-svg" viewBox="0 0 80 80" aria-hidden="true">
+                    <circle class="dial-track" cx="40" cy="40" r="30"></circle>
+                    <circle class="dial-arc" id="arc-space" cx="40" cy="40" r="30" stroke-dasharray="188.5" stroke-dashoffset="158"></circle>
+                  </svg>
+                  <div class="dial-readout" id="val-space">16%</div>
+                  <label class="dial-label" for="rng-space">Room Space &amp; Hall</label>
+                  <input type="range" class="range-input" id="rng-space" min="0" max="100" value="16">
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-stack">
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Live Spectrum &amp; Harman Target Curve</h2>
+                <span class="card-meta" id="headroom-readout">Preamp -2.4 dB, ceiling -0.3 dBFS</span>
+              </div>
+              <canvas id="spectrum-canvas" class="canvas-frame" width="540" height="196"></canvas>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Soundcore R50i NC Quick Hardware Control</h2>
+                <span class="card-meta" id="fw-serial-readout">Firmware 01.64, serial 3959685923bf067c</span>
+              </div>
+              <div class="kv-list">
+                <div class="kv-row">
+                  <span class="kv-key">Ambient Mode (06 81)</span>
+                  <div class="seg-group" id="quick-ambient-group">
+                    <button type="button" class="seg-btn" data-ambient="noise_canceling" aria-pressed="true">ANC On</button>
+                    <button type="button" class="seg-btn" data-ambient="transparency" aria-pressed="false">Transparency</button>
+                    <button type="button" class="seg-btn" data-ambient="normal" aria-pressed="false">Normal</button>
+                  </div>
+                </div>
+                <div class="kv-row">
+                  <span class="kv-key">ANC Algorithm</span>
+                  <div class="seg-group" id="quick-anc-mode-group">
+                    <button type="button" class="seg-btn" data-ancmode="adaptive" aria-pressed="true">Adaptive</button>
+                    <button type="button" class="seg-btn" data-ancmode="manual" aria-pressed="false">Manual 1-5</button>
+                    <button type="button" class="seg-btn" data-ancmode="multi_scene" aria-pressed="false">Multi-Scene</button>
+                  </div>
+                </div>
+                <div class="kv-row">
+                  <span class="kv-key">Manual ANC Depth / Scene</span>
+                  <div class="seg-group">
+                    <input type="range" id="rng-anc-level" min="1" max="5" value="5" style="width:92px">
+                    <span class="kv-val" id="val-anc-level">Level 5</span>
+                    <select id="sel-multiscene" class="select-box" aria-label="Multi-scene ANC mode">
+                      <option value="transport">Transport</option>
+                      <option value="outdoor">Outdoor</option>
+                      <option value="indoor">Indoor</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="kv-row">
+                  <span class="kv-key">Wind Noise Suppression</span>
+                  <button type="button" class="seg-btn" id="btn-wind-noise" aria-pressed="true">Enabled</button>
+                </div>
+                <div class="kv-row">
+                  <span class="kv-key">Earbud Hardware Features</span>
+                  <div class="seg-group">
+                    <button type="button" class="seg-btn" id="btn-hw-surround" aria-pressed="false">3D Surround</button>
+                    <button type="button" class="seg-btn" id="btn-hw-gaming" aria-pressed="false">Gaming Mode</button>
+                    <button type="button" class="seg-btn" id="btn-hw-bassup" aria-pressed="false">BassUp</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="view-pro" class="grid-main hidden-panel" aria-label="Pro parametric and hardware EQ rack">
+          <div class="col-stack">
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">10-Band Host Parametric EQ (RBJ Biquad + EqualizerAPO)</h2>
+                <div class="seg-group">
+                  <label for="rng-preamp" class="card-meta">Preamp</label>
+                  <input type="range" id="rng-preamp" min="-12" max="12" step="0.5" value="0" style="width:90px">
+                  <span class="kv-val" id="val-preamp">+0.0 dB</span>
+                  <button type="button" class="btn-control" id="btn-reset-harman">Load Harman Fix</button>
+                </div>
+              </div>
+              <div class="eq-rack-grid" id="host-eq-grid"></div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">8-Band R50i NC Hardware EEPROM EQ + DRC Matrix (02 83)</h2>
+                <button type="button" class="btn-control" id="btn-flash-hw-eq">Flash EQ to Earbuds</button>
+              </div>
+              <div class="hw-eq-grid" id="hw-eq-grid"></div>
+            </article>
+          </div>
+
+          <div class="col-stack">
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Virtual 7.1 Binaural Soundstage &amp; Dolby Leveler</h2>
+                <span class="card-meta" id="spatial-meta">ITD 380 us, Crossfeed 22%</span>
+              </div>
+              <canvas id="radar-canvas" class="canvas-frame" width="540" height="180"></canvas>
+              <div class="kv-list">
+                <div class="kv-row">
+                  <span class="kv-key">Dolby 3-Band Leveler Intensity</span>
+                  <div class="seg-group">
+                    <input type="range" id="rng-dolby-leveler" min="0" max="100" value="45" style="width:120px">
+                    <span class="kv-val" id="val-dolby-leveler">45%</span>
+                  </div>
+                </div>
+                <div class="kv-row">
+                  <span class="kv-key">Binaural Crossfeed Blend</span>
+                  <div class="seg-group">
+                    <input type="range" id="rng-crossfeed" min="0" max="45" value="22" style="width:120px">
+                    <span class="kv-val" id="val-crossfeed">22%</span>
+                  </div>
+                </div>
+                <div class="kv-row">
+                  <span class="kv-key">Room Acoustic Geometry</span>
+                  <select id="sel-room-model" class="select-box" aria-label="Room acoustic geometry">
+                    <option value="studio_booth">Studio Control Booth</option>
+                    <option value="cinema_theater">Dolby Cinema Theater</option>
+                    <option value="concert_hall">Symphony Concert Hall</option>
+                  </select>
+                </div>
+                <div class="kv-row">
+                  <span class="kv-key">EqualizerAPO Live Path</span>
+                  <code id="apo-path-code">C:\ProgramData\SoundBettrCore\live_apo.txt</code>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="view-hw" class="grid-main hidden-panel" aria-label="R50i NC hardware and touch control remapping">
+          <div class="col-stack">
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Touch Control Remapper (Command 04 81)</h2>
+                <span class="card-meta">Flashes directly to Left &amp; Right R50i NC earbuds</span>
+              </div>
+              <div class="kv-list" id="touch-remap-list"></div>
+            </article>
+          </div>
+
+          <div class="col-stack">
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">A3959 RFCOMM Telemetry &amp; Last Wire Packet</h2>
+                <button type="button" class="btn-control" id="btn-export-json">Export Preset</button>
+              </div>
+              <div class="kv-list">
+                <div class="kv-row">
+                  <span class="kv-key">Target Device</span>
+                  <span class="kv-val" id="hw-device-name">Soundcore R50i NC (A3959)</span>
+                </div>
+                <div class="kv-row">
+                  <span class="kv-key">Left / Right Battery</span>
+                  <span class="kv-val" id="hw-battery-detail">L 90% (9/10), R 90% (9/10)</span>
+                </div>
+                <div class="kv-row">
+                  <span class="kv-key">Firmware / Serial</span>
+                  <span class="kv-val" id="hw-fw-detail">01.64 / 3959685923bf067c</span>
+                </div>
+                <div class="kv-row">
+                  <span class="kv-key">Touch Tone Prompt (01 83)</span>
+                  <button type="button" class="seg-btn" id="btn-touch-tone" aria-pressed="true">Enabled</button>
+                </div>
+                <div class="kv-row">
+                  <span class="kv-key">Last A3959 Packet (Hex)</span>
+                  <code id="last-packet-hex">08 EE 00 00 00 02 83 ...</code>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="player-dock" aria-label="Built-in spatial test generator and audio file player">
+        <div class="player-group">
+          <strong class="card-title">Spatial Audition Player</strong>
+          <button type="button" class="btn-control" id="btn-test-orbit">7.1 Speaker Orbit</button>
+          <button type="button" class="btn-control" id="btn-test-subbass">Sub-Bass Sweep</button>
+          <button type="button" class="btn-control" id="btn-test-vocal">Vocal Pulse</button>
+          <button type="button" class="btn-control" id="btn-test-pink">Pink Noise</button>
+        </div>
+
+        <div class="player-group">
+          <button type="button" class="btn-control" id="btn-load-audio">Load Audio File</button>
+          <input type="file" id="file-audio-input" accept="audio/*" class="hidden-panel">
+          <button type="button" class="btn-control" id="btn-stop-audio">Stop Playback</button>
+          <span class="card-meta" id="player-status-text">Ready to audition any preset or A/B toggle live</span>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

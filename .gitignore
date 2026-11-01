@@ -1,0 +1,10 @@
+# Build intermediates
+desktop/src-tauri/target/
+desktop/src-tauri/gen/
+installer/target/
+android/.gradle/
+android/.kotlin/
+android/build/
+android/app/build/
+android/local.properties
+.superpowers/
