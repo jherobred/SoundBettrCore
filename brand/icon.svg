@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108">
+  <defs>
+    <radialGradient id="bg" cx=".5" cy=".35" r=".75">
+      <stop offset="0" stop-color="#1A2029"/>
+      <stop offset="1" stop-color="#0D0F12"/>
+    </radialGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF9E58"/>
+      <stop offset="1" stop-color="#FF7A28"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#2EC4B6"/>
+      <stop offset="1" stop-color="#6CE5D8"/>
+    </linearGradient>
+  </defs>
+  <rect width="108" height="108" rx="26" fill="url(#bg)"/>
+  <rect x="1" y="1" width="106" height="106" rx="25" fill="none" stroke="#262C38" stroke-width="2"/>
+  <circle cx="54" cy="54" r="37" fill="none" stroke="#2EC4B6" stroke-width="1.5" stroke-dasharray="4 5" opacity=".45"/>
+  <circle cx="54" cy="54" r="28" fill="none" stroke="#242A35" stroke-width="4"/>
+  <path d="M34.2 73.8 A28 28 0 1 1 73.8 73.8" fill="none" stroke="url(#amber)" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M22 58 C31 64, 38 66, 46 53 C54 40, 62 36, 71 42 C78 46, 82 41, 86 37" fill="none" stroke="url(#cyan)" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="54" cy="54" r="12" fill="#14171C" stroke="#FF7A28" stroke-width="2"/>
+  <line x1="54" y1="54" x2="62" y2="44" stroke="#F3F5F8" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="54" cy="17" r="3" fill="#2EC4B6"/>
+  <circle cx="28" cy="28" r="2.6" fill="#2EC4B6"/>
+  <circle cx="80" cy="28" r="2.6" fill="#2EC4B6"/>
+  <circle cx="17" cy="54" r="2.6" fill="#FF7A28"/>
+  <circle cx="91" cy="54" r="2.6" fill="#FF7A28"/>
+</svg>
