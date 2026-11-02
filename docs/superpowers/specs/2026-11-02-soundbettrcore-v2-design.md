@@ -159,7 +159,7 @@ States: `searching` → `recognized` | `new` | `error`.
 
 ## 10. Sizes
 
-Kokoro adds about 86 MB. Expected sizes: Windows Setup about 95 MB, portable about 95 MB, APK about 110 MB.
+Measured on the first build: the English Kokoro files are 159 MB (int8 model 109 MB, voices 27 MB, espeak-ng data 17 MB, lexicon 6 MB). Windows Setup is 116 MB (NSIS compresses the model) and the arm64 APK is 182 MB. There is no portable `.exe`: the app needs its resource folder next to it.
 
 ## 11. Risks and open items
 
@@ -173,3 +173,13 @@ Kokoro adds about 86 MB. Expected sizes: Windows Setup about 95 MB, portable abo
 | R6 | Announcement playing over the earbuds' own "connected" prompt. | Delay the announcement about 1.5 s after the route is active. Tune it on the R50i. |
 
 Sources checked on 2026-11-02: [AutoEq license (ecosyste.ms)](https://awesome.ecosyste.ms/projects/github.com%2Fjaakkopasanen%2FAutoEq), [SADIE II (Zenodo)](https://zenodo.org/records/12092466), [SADIE database page](https://www.york.ac.uk/sadie-project/database.html), [sherpa-onnx Rust API](https://k2-fsa.github.io/sherpa/onnx/rust-api/index.html), [kokoro-js](https://www.npmjs.com/package/kokoro-js), [Picovoice on-device TTS benchmark](https://picovoice.ai/blog/on-device-tts/).
+
+## 12. Changes made during the build (2026-11-02)
+
+- **Installer:** Tauri's NSIS bundler replaces the custom Rust installer. EqualizerAPO is connected from inside the app ("Connect EqualizerAPO", one Windows permission prompt), so it also works when EqualizerAPO is installed later.
+- **Android:** the Rust core runs in the app process and talks to Kotlin over JNI (`NativeBridge`, `AudioEngine`, `AudioService`), not through a Tauri plugin. This keeps announcements and the EQ working with the window closed.
+- **Voice:** the official `sherpa-onnx` 2.0.1 crate on both platforms (static on Windows, shared `.so` on Android). Speaker ids come from the model's `id2speaker` metadata.
+- **AutoEq fit:** damped least squares over 40 Hz to 14 kHz instead of matching the 10 band centers. Mean error across all 8,850 entries is 0.84 dB.
+- **R1 and R4 resolved:** AutoEq is MIT for the whole repo, results included. SADIE II is Apache 2.0, and subject D2 (Neumann KU100) supplies the ±30° impulse responses.
+- **Not in AutoEq:** the R50i NC has no published measurement. The P25i and P40i are the closest siblings.
+- **Build note:** Tauri's Android build links the Rust library into `jniLibs` with a symlink, which Windows refuses outside Developer Mode. `scripts/android-apk.ps1` copies the libraries and runs Gradle instead.

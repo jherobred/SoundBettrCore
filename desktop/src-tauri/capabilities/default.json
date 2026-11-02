@@ -1,6 +1,0 @@
-{
-  "identifier": "default",
-  "description": "Default capability for SoundBettrCore studio rack window.",
-  "windows": ["main"],
-  "permissions": ["core:default"]
-}

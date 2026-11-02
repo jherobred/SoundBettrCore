@@ -1,12 +1,12 @@
 # Build intermediates
-desktop/src-tauri/target/
-desktop/src-tauri/gen/
-installer/target/
-android/.gradle/
-android/.kotlin/
-android/build/
-android/app/build/
-android/local.properties
 .superpowers/
 .taste-skill/
 .hallmark/
+
+app/node_modules/
+app/dist/
+app/src-tauri/gen/schemas/
+app/src-tauri/resources/kokoro/
+dist/
+/SoundBettrCore.exe
+/SoundBettrCore.apk

@@ -2,127 +2,88 @@
 
 <h1 align="center">SoundBettrCore</h1>
 
-<p align="center"><b>Make your Anker Soundcore R50i NC sound significantly better.</b><br>
-Cuts the factory upper-bass mud, restores vocal clarity, adds 3D 7.1 surround and Dolby-style loudness leveling, and talks directly to the earbuds over Bluetooth RFCOMM.</p>
+<p align="center"><b>Your EQ follows whatever you plug in or connect.</b><br>
+Every pair of headphones, earbuds or speakers gets its own sound, remembered on your PC and phone. When one connects, the app switches to its sound and tells you, out loud.</p>
 
 <p align="center">
-  <a href="https://github.com/jherobred/SoundBettrCore/releases/latest"><img src="https://img.shields.io/github/v/release/jherobred/SoundBettrCore?style=flat-square&color=FF7A28&label=release" alt="Latest release"></a>
-  <a href="https://github.com/jherobred/SoundBettrCore/releases"><img src="https://img.shields.io/github/downloads/jherobred/SoundBettrCore/total?style=flat-square&color=2EC4B6" alt="Downloads"></a>
-  <img src="https://img.shields.io/badge/Windows%20%C2%B7%20Android%20%C2%B7%20R50i%20NC%20(A3959)-0D0F12?style=flat-square" alt="Windows, Android, Soundcore R50i NC A3959">
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/jherobred/SoundBettrCore?style=flat-square&color=0D0F12" alt="MIT license"></a>
+  <a href="https://github.com/jherobred/SoundBettrCore/releases/latest"><img src="https://img.shields.io/github/v/release/jherobred/SoundBettrCore?style=flat-square&color=1d5fd6&label=release" alt="Latest release"></a>
+  <img src="https://img.shields.io/badge/Windows%20%C2%B7%20Android-1b1d1f?style=flat-square" alt="Windows and Android">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/jherobred/SoundBettrCore?style=flat-square&color=1b1d1f" alt="MIT license"></a>
 </p>
 
 <p align="center">
   <a href="https://github.com/jherobred/SoundBettrCore/releases/latest"><b>Download</b></a> ·
-  <a href="#windows-and-the-dsp-rack">Windows</a> ·
-  <a href="#android">Android</a> ·
-  <a href="#r50i-nc-hardware-control">R50i NC Hardware</a> ·
+  <a href="#what-it-does">What it does</a> ·
   <a href="#install">Install</a> ·
+  <a href="#limits">Limits</a> ·
   <a href="#build">Build</a>
 </p>
 
 > [!WARNING]
-> **Windows will say this is a virus. It's not, I promise 😭**
-> I just don't have the paid code-signing certificate that makes Windows trust an app, so SmartScreen panics at anything unsigned. Click **More info**, then **Run anyway**. Every line of code is right here if you want to check.
-
-<p align="center">
-  <img src="docs/hero.png" width="100%" alt="SoundBettrCore studio rack: 6 acoustic presets, 4 rotary macro dials, 7.1 surround radar, live FFT spectrum, and direct Soundcore R50i NC Bluetooth hardware controls">
-</p>
-
-## What's in 0.1
-
-- **R50i NC Harman / AutoEq target correction.** Cuts the stock `62 to 250 Hz` bloat (`-4.2 dB` at `125 Hz`, `-3.4 dB` at `250 Hz`) that makes vocals sound veiled, and lifts `2 to 4 kHz` presence (`+3.2 dB` at `2 kHz`, `+3.8 dB` at `4 kHz`) with sub-bass extension down to `28 Hz`.
-- **3D Binaural 7.1 Virtual Surround and Crossfeed.** Places `L, R, C, LFE, LS, RS, LB, RB` virtual speakers outside your head with ITD/ILD cues, pinna notches, and a `650 Hz` (`-4.5 dB`) crossfeed network.
-- **Dolby-style 3-band Compressor, Loudness Leveler, and Limiter.** Linkwitz-Riley 4th-order crossovers at `200 Hz` and `2500 Hz` keep quiet dialogue and detail audible while a `-0.3 dBFS` brickwall peak limiter prevents clipping.
-- **Harmonic Sub-Bass Exciter and Room Acoustics.** Generates clean sub-bass harmonics (`30 to 90 Hz`) without muddying the midrange, paired with a Schroeder/Freeverb room simulator (`Studio`, `Small Room`, `Cinema`, `Concert Hall`).
-- **Direct R50i NC (`A3959`) Bluetooth RFCOMM hardware control** on both Windows and Android. No Soundcore account or cloud login needed.
-- **Built-in 7.1 Test Bench and Local Audio Player** with instant **A/B Bypass** so you can hear the exact difference right away.
-
-## Windows and the DSP rack
+> **Windows SmartScreen will warn you.** The installer is not code-signed (that certificate costs money). Click **More info**, then **Run anyway**. All the code is here to read.
 
 <table>
 <tr>
-<td width="50%"><img src="docs/simple-rack.png" alt="Simple Mode showing 6 factory presets and 4 rotary macro dials"></td>
-<td width="50%"><img src="docs/pro-rack.png" alt="Pro Rack Mode showing 10-band Parametric Host EQ and 8-band Hardware EEPROM EQ"></td>
+<td width="50%"><img src="docs/now-light.jpg" alt="Now screen: the connected output, its sound profile and the remembered devices"></td>
+<td width="50%"><img src="docs/now-dark.jpg" alt="The same screen in the dark theme"></td>
 </tr>
 <tr>
-<td><b>One-click presets and four macro dials.</b><br>Pick R50i NC Harman Target Fix, Dolby Cinema 7.1, BassHead Clean, Vocal &amp; Podcast Clear, FPS Footstep Radar, or Late Night Leveler, then dial in Sub-Bass Weight, Vocal Presence, 3D Surround Width, and Dolby Leveler.</td>
-<td><b>10-band Host EQ + 8-band Hardware EEPROM EQ.</b><br>Shape the 10-band parametric biquad curve on your PC or phone, or flash an 8-band hardware curve with exact A3959 Dynamic Range Compression directly into the earbuds.</td>
-</tr>
-<tr>
-<td><img src="docs/hardware-anc.png" alt="R50i NC Bluetooth hardware panel showing ANC modes, battery, and touch controls"></td>
-<td><img src="docs/test-bench.png" alt="7.1 speaker orbit radar, FFT spectrum, and built-in audio synthesizer"></td>
-</tr>
-<tr>
-<td><b>Full R50i NC hardware control over Bluetooth.</b><br>Switch ANC, Transparency, and Normal modes, set Manual 1 to 5 or Adaptive ANC, toggle Wind Noise Suppression, BassUp, 3D Surround, and Gaming Mode, and remap touch controls.</td>
-<td><b>Built-in 7.1 test bench and live spectrum.</b><br>Run the 7.1 speaker orbit, sub-bass sweep, vocal presence pulse, or pink noise generator, or load your own WAV, MP3, FLAC, or OGG track and flip A/B Bypass in real time.</td>
+<td><img src="docs/tests.jpg" alt="Tests screen: hearing test, balance check and blind A/B"></td>
+<td><img src="docs/settings-dark.jpg" alt="Settings: theme, motion and the eight Kokoro announcement voices"></td>
 </tr>
 </table>
 
-- **System-wide Windows audio via EqualizerAPO.** Every slider and preset writes live filter directives (`Preamp`, `Filter PK`, `Copy` crossfeed, and room convolution parameters) to `C:\ProgramData\SoundBettrCore\live_apo.txt`, which EqualizerAPO reloads in under `15 ms` with zero audio dropouts.
-- **Works without EqualizerAPO too.** The built-in 7.1 Test Bench, local audio file player, and R50i NC Bluetooth EEPROM flasher work out of the box on any Windows 10 or 11 PC.
-- **System tray integration.** Closes to the Windows tray with quick preset switching and one-click DSP bypass.
-- **Import and export.** Load or save presets as `.json` or standard EqualizerAPO `.txt` files.
+## What it does
 
-## Android
-
-- **System-wide Android 10+ DSP (`DynamicsProcessing`).** Attaches a foreground `mediaPlayback` + `connectedDevice` service (`SoundBettrService`) to global output mix session `0` (with fallback to active player sessions), running a 10-band pre-EQ, 3-band multi-band compressor (`Mbc`), post-EQ harmonic shelves, and a `-0.3 dBFS` brickwall limiter across your music and video apps.
-- **Quick Settings Tile.** Pull down your phone's notification shade and tap **SoundBettr R50i** to toggle processing on or off without leaving your current app.
-- **Same 6 presets, Simple/Pro Rack, 7.1 Test Bench, and R50i NC Bluetooth RFCOMM control** as the Windows app, built natively with Kotlin and Jetpack Compose.
-
-## R50i NC hardware control
-
-SoundBettrCore speaks the binary Soundcore `A3959` protocol directly over Bluetooth RFCOMM (`08 ee 00 00 00 <cmd_hi> <cmd_lo> <len_lo> <len_hi> <body> <crc>`):
-
-- **Noise Control (`06 81`):** Switch between **ANC**, **Transparency**, and **Normal**. Choose **Manual Level 1 to 5**, **Adaptive ANC**, or **Multi-Scene** (`Transport`, `Outdoor`, `Indoor`), toggle **Vocal Transparency**, and turn on **Wind Noise Suppression**.
-- **8-Band Hardware EEPROM EQ + DRC (`02 83`):** Writes 8 hardware bands (`100 Hz`, `200 Hz`, `400 Hz`, `800 Hz`, `1.6 kHz`, `3.2 kHz`, `6.4 kHz`, `12.8 kHz`) plus the 8-band `A3959` Dynamic Range Compression matrix directly into the earbuds' onboard memory, so the tuning stays on the earbuds across every device.
-- **Onboard 3D Surround (`02 86`) and Gaming Mode (`01 87`):** Toggle the earbud DSP's native 3D surround widening and low-latency gaming mode.
-- **Touch Control Remapping (`04 81`):** Remap Left and Right single-tap, double-tap, triple-tap, and long-press actions (`Volume Up/Down`, `Play/Pause`, `Next/Previous Track`, `ANC Cycle`, `Voice Assistant`, `Game Mode`, or `Disabled`).
-- **Live Battery and Firmware (`01 01`):** Reads separate Left and Right earbud battery percentages (`0 to 100%`), charging flags, firmware version, and serial number.
+- **Remembers every output.** Bluetooth earbuds, USB DACs, the headphone jack and built-in speakers each get their own name, color and sound profile. A new output gets a setup card and plays flat until you finish it.
+- **Says when it connects.** "Connected to Jhems's R50i NC. Harman fix profile on. Battery 78 percent." The voice is Kokoro, built into the app and run offline. Eight voices, and you can change the wording.
+- **Tune.** A 10-band EQ (31 Hz to 16 kHz) with an automatic preamp so boosts never clip, left/right balance, virtual surround and crossfeed.
+- **AutoEq.** Search 8,850 measured headphone corrections, bundled with the app, and apply one in a tap. The app fits each correction to its 10 bands (0.84 dB average error across the whole database).
+- **Tests.** A hearing test per ear at six frequencies that turns your results into an EQ, a balance check with a centered tone, and a blind A/B between two profiles while you play your own music.
+- **Soundcore R50i NC and P30i.** When the earbuds answer over Bluetooth, the app shows their battery, switches noise control, sends the 8-band EQ that lives in the earbuds and toggles gaming mode. Every command shows whether the earbuds confirmed it.
+- **Light, dark or system theme**, and motion you can turn off.
 
 ## Install
 
-**Windows**
+**Windows 10 or 11.** Run `SoundBettrCore-Setup-0.2.0.exe` from [Releases](https://github.com/jherobred/SoundBettrCore/releases/latest). The app lives in the tray, so it keeps announcing connections with the window closed.
 
-1. Download `SoundBettrCore-Setup-0.1.0.exe` from [Releases](https://github.com/jherobred/SoundBettrCore/releases/latest). When SmartScreen warns, choose **More info**, then **Run anyway**.
-2. Setup installs `SoundBettrCore.exe` to `%LOCALAPPDATA%\Programs\SoundBettrCore`, creates a Start Menu shortcut, adds an uninstall entry in Installed Apps, and automatically hooks EqualizerAPO (`C:\Program Files\EqualizerAPO\config\config.txt`) if EqualizerAPO is installed.
+To change the sound of every app (Spotify, YouTube, games), install [EqualizerAPO](https://sourceforge.net/projects/equalizerapo/) and pick your outputs in its Configurator. Then press **Connect EqualizerAPO** in SoundBettrCore. Windows asks for permission once. Without EqualizerAPO, the announcements, device memory, AutoEq and R50i controls still work.
 
-`SoundBettrCore-0.1.0-portable.exe` (also checked into the repo root as `SoundBettrCore.exe`) runs without installing.
-
-**Android**
-
-Install `SoundBettrCore-0.1.0-android.apk` (also checked into the repo root as `SoundBettrCore.apk`, Android 10+) from [Releases](https://github.com/jherobred/SoundBettrCore/releases/latest), and allow Nearby Devices (`BLUETOOTH_CONNECT` / `BLUETOOTH_SCAN`) when prompted so the app can talk to your paired R50i NC earbuds.
+**Android 10 or later.** Install `SoundBettrCore-0.2.0-android.apk` from [Releases](https://github.com/jherobred/SoundBettrCore/releases/latest). Allow Nearby devices (for the earbuds) and notifications (the background service shows one). The first launch unpacks the voice, which takes a few seconds.
 
 ## Limits
 
-- Direct Bluetooth RFCOMM hardware commands target the **Anker Soundcore R50i NC** (`A3959`) and **Soundcore P30i** (which shares the `A3959` firmware protocol). The host 5-stage DSP, EqualizerAPO engine, Android `DynamicsProcessing` service, and 7.1 Test Bench work with any headphones or earbuds.
-- System-wide Windows processing across third-party apps uses [EqualizerAPO](https://sourceforge.net/projects/equalizerapo/). Without EqualizerAPO installed, the built-in 7.1 Test Bench, local audio player, and R50i NC Bluetooth EEPROM EQ flasher still work normally.
-- Some Android OEM builds restrict global audio session `0` attachment for third-party equalizers. When that happens, flashing the 8-band curve to the R50i NC hardware EEPROM (`02 83`) still applies your tuning across every app on the phone.
+- **The R50i NC is not in AutoEq.** Nobody has published a measurement of it. The closest measured siblings are the Soundcore P25i and P40i.
+- **Android cannot tell two wired headsets apart.** The jack reports every set the same way. If you save more than one, the app asks which one is plugged in.
+- **Some Android phones block apps from changing other apps' sound** (audio session 0). The app says so when it happens, and on the R50i NC the earbuds' own EQ still works.
+- **Surround on Windows** uses EqualizerAPO's virtual channels with SADIE II impulse responses for two speakers in front of you. **On Android** it uses the phone's own Virtualizer effect where the phone allows it.
+- The hearing test measures your hearing **relative to this device**. It is not a medical hearing test.
 
 ## Privacy
 
-Everything runs locally on your PC and phone. There are no accounts, no telemetry, no analytics, and no network requests.
+Everything runs on your device. There are no accounts and no analytics. The only internet use is the **Update** button for the AutoEq database in Settings, and only when you press it.
 
 ## Build
 
-Needs Windows, Rust 1.85+, JDK 21, and the Android SDK (`C:\Users\J30N\android-sdk`, platform 37.2):
+Needs Windows, Node 22+, Rust 1.85+, JDK 21, the Android SDK and NDK, and `gh` (to fetch the voice model).
 
 ```powershell
-cargo test --manifest-path desktop/src-tauri/Cargo.toml
-pwsh -File scripts/build-release.ps1
+pwsh scripts/fetch-models.ps1   # Kokoro voice, about 160 MB, into app/src-tauri/resources/kokoro
+pwsh scripts/build-release.ps1  # tests, then dist/: Windows Setup, Android APK, SHA256SUMS.txt
 ```
 
-The release script runs the Rust and Android JUnit test suites, builds the portable Windows app, embeds it into the Windows Setup installer, assembles the Android APK, copies `SoundBettrCore.exe` and `SoundBettrCore.apk` to the repo root, and writes all release binaries plus `SHA256SUMS.txt` to `dist/`.
+Windows Controlled Folder Access blocks build tools from writing inside `Documents`, so every build and test runs through `scripts/stage.ps1`, which mirrors the repo to `C:\Users\J30N\.sbc-build`.
 
 | Folder | What |
 |---|---|
-| `desktop/src-tauri/` | Windows app, Tauri 2, Rust 5-stage DSP, EqualizerAPO writer, WinRT RFCOMM client, and WebAudio UI |
-| `installer/` | Windows Setup installer and uninstaller, Rust + Win32 + EqualizerAPO hook |
-| `android/` | Android app, Kotlin, Jetpack Compose, `DynamicsProcessing` service, Quick Settings tile, and RFCOMM client |
-| `dist/` | Ready-to-run Setup `.exe`, Portable `.exe`, Android `.apk`, and `SHA256SUMS.txt` |
-| `brand/` | Vector icon source |
-| `docs/` | UI screenshots, design spec, and implementation plan |
+| `app/src` | The UI: React and TypeScript |
+| `app/src-tauri/src` | The Rust core: devices, profiles, EQ math, AutoEq, the voice, the hearing test, EqualizerAPO and R50i control |
+| `app/android/kotlin` | Android: the background service, DynamicsProcessing, Bluetooth, and the JNI bridge to the core |
+| `scripts` | Staging, release build, and the AutoEq, HRIR and model preparation |
 
-## License
+## Credits
 
-MIT. See [LICENSE](LICENSE).
+- Voice: [Kokoro 82M](https://huggingface.co/hexgrad/Kokoro-82M) by hexgrad, run with [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) (both Apache 2.0).
+- Headphone corrections: [AutoEq](https://github.com/jaakkopasanen/AutoEq) by Jaakko Pasanen (MIT).
+- Surround: [SADIE II](https://www.york.ac.uk/sadie-project/database.html) head-related impulse responses, University of York (Apache 2.0).
+- R50i NC protocol details were checked against [OpenSCQ30](https://github.com/Oppzippy/OpenSCQ30).

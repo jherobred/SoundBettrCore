@@ -1,3 +1,0 @@
-b20e19b83b49987baf96f322c7d965fab2f797713a489bf39a3679d01e67e30c  SoundBettrCore-Setup-0.1.0.exe
-f94cbd7ab1a5d5016fc23a8a06cc3244b697565881ea42cf4f947117a0435530  SoundBettrCore-0.1.0-portable.exe
-cefbdaad904c8afcf7a65820c7e7a4ba9847497d95ad07e03eb545257c79a842  SoundBettrCore-0.1.0-android.apk
